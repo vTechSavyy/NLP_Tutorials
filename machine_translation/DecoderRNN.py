@@ -4,6 +4,20 @@ import torch.nn.functional as F
 
 from helpers import *
 
+## Explanation: 
+
+# The main input to the decoder is the last hidden state from the encoder
+# The input state of the decoder is initalized to the SOS_token
+
+# The deocder has its own embedding layer from which it looks up target language word embeddings based on word index
+# The main layer of the decoder is a GRU. 
+# The GRU layer is followed by a linear layer that maps from the GRU output to a vector of scores for each word in the target language
+# The GRU is not run in a conventional manner. Its running operation depends
+# on whether we're in training or inference mode. In training mode, we use 'Teacher-Forcing' which means that the input to the next 
+# step of the decoder is the word from the ground truth target sequence
+# In inference, we use the most proabable previous output for the next step input to the decoder
+
+
 class DecoderRNN(nn.Module):
     def __init__(self, hidden_size, output_size):
         super(DecoderRNN, self).__init__()
