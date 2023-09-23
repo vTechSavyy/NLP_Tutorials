@@ -7,8 +7,9 @@ import numpy as np
 
 MAX_LENGTH = 10
 
-SOS_token = 0
-EOS_token = 1
+PAD_token = 0
+SOS_token = 1
+EOS_token = 2
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
